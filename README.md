@@ -13,7 +13,7 @@ Basic example
 
 ```php
 session_start();
-$captcha = new SimpleCaptcha();
+$captcha = new SimpleCaptcha('captcha_name');
 // Change configuration...
 //$captcha->wordsFile = null;           // Disable dictionary words and use random letters instead
 //$captcha->wordsFile = 'words/es.txt'; // Enable spanish words dictionary
@@ -30,8 +30,12 @@ $captcha->CreateImage();
 You can validate the php captcha with: (case-insensitive version)
 
 ```php
-if (empty($_SESSION['captcha']) || strtolower(trim($_REQUEST['captcha'])) != $_SESSION['captcha']) {
-    return "Invalid captcha";
+$captcha = new SimpleCaptcha('captcha_name');
+if( $captcha->check($_REQUEST['captcha_val']) )
+  return "Invalid captcha";
+}
+else {
+  // process request
 }
 ```
 
